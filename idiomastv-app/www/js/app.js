@@ -1,4 +1,4 @@
-const DEFAULT_SERVER = 'https://duty-type-modification-guarantee.trycloudflare.com';
+const DEFAULT_SERVER = 'https://idiomas-tv.vercel.app';
 let savedUrl = localStorage.getItem('idiomastv_server_url');
 let SERVER_BASE = (savedUrl && savedUrl.trim().startsWith('http')) ? savedUrl.trim() : DEFAULT_SERVER;
 
