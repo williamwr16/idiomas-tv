@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IdiomasTV - Streaming para Android TV</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/tv.css">
+</head>
+<body class="tv-mode">
+
+  <!-- Layout Principal de TV (10-Foot UI) -->
+  <div class="tv-app-container">
+    
+    <!-- Sidebar de Navegação Lateral -->
+    <aside class="tv-sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-icon">
+          <span class="material-icons-round">local_movies</span>
+        </div>
+        <span class="brand-title">Idiomas<span class="highlight">TV</span></span>
+      </div>
+
+      <nav class="sidebar-menu">
+        <button class="nav-item focusable active" id="nav-home" data-target="home-section" tabindex="0">
+          <span class="material-icons-round">home</span>
+          <span class="nav-label">Início</span>
+        </button>
+
+        <button class="nav-item focusable" id="nav-languages" data-target="languages-section" tabindex="0">
+          <span class="material-icons-round">translate</span>
+          <span class="nav-label">Idiomas</span>
+        </button>
+
+        <button class="nav-item focusable" id="nav-continue" data-target="continue-section" tabindex="0">
+          <span class="material-icons-round">history</span>
+          <span class="nav-label">Continuar</span>
+        </button>
+
+        <button class="nav-item focusable" id="nav-search" data-target="search-section" tabindex="0">
+          <span class="material-icons-round">search</span>
+          <span class="nav-label">Buscar</span>
+        </button>
+
+        <button class="nav-item focusable" id="nav-settings" data-target="settings-section" tabindex="0">
+          <span class="material-icons-round">settings</span>
+          <span class="nav-label">Servidor IP</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="server-status" id="sidebar-server-status">
+          <span class="status-dot online" id="server-status-dot"></span>
+          <span class="status-text" id="server-status-text">Drive de Pobre Conectado</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Área de Conteúdo Principal -->
+    <main class="tv-main-content">
+
+      <!-- Breadcrumbs de Navegação -->
+      <div class="tv-breadcrumb" id="breadcrumb-bar" style="display: none;">
+        <button class="breadcrumb-back focusable" id="btn-global-back" tabindex="0">
+          <span class="material-icons-round">arrow_back</span>
+          <span>Voltar</span>
+        </button>
+        <div class="breadcrumb-path" id="breadcrumb-path"></div>
+      </div>
+
+      <!-- SEÇÃO INÍCIO (HERO + TRILHOS) -->
+      <section class="content-section active" id="home-section">
+        
+        <!-- Hero Banner do Idioma em Destaque -->
+        <div class="hero-banner" id="hero-banner">
+          <div class="hero-backdrop" id="hero-bg"></div>
+          <div class="hero-overlay"></div>
+          <div class="hero-details">
+            <span class="hero-badge" id="hero-badge">🌟 DESTAQUE PARA ESTUDO</span>
+            <h1 class="hero-title" id="hero-title">Inglês Completo</h1>
+            <div class="hero-meta">
+              <span class="meta-tag" id="hero-size">846.20 GB</span>
+              <span class="meta-tag">Mais de 20 Cursos completos</span>
+              <span class="meta-tag quality">HD 1080p</span>
+            </div>
+            <p class="hero-description" id="hero-desc">
+              Aprenda inglês do zero ao avançado com videoaulas, diálogos práticos, cursos renomados e materiais de estudo extraídos do Drive de Pobre.
+            </p>
+            <div class="hero-actions">
+              <button class="btn-primary focusable" id="hero-play-btn" tabindex="0">
+                <span class="material-icons-round">play_arrow</span>
+                <span>Explorar Cursos</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Trilho: Continue Assistindo -->
+        <div class="rail-container" id="rail-continue-container" style="display: none;">
+          <h2 class="rail-title"><span class="material-icons-round">play_circle_filled</span> Continue Assistindo</h2>
+          <div class="rail-scroll-wrapper">
+            <div class="rail-track" id="continue-track">
+              <!-- Renderizado dinamicamente -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Trilho: Idiomas Disponíveis -->
+        <div class="rail-container">
+          <h2 class="rail-title"><span class="material-icons-round">public</span> Selecione um Idioma para Estudar</h2>
+          <div class="rail-scroll-wrapper">
+            <div class="rail-track" id="languages-track">
+              <!-- Renderizado dinamicamente -->
+              <div class="skeleton-card"></div>
+              <div class="skeleton-card"></div>
+              <div class="skeleton-card"></div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- SEÇÃO IDIOMAS (GRADE COMPLETA) -->
+      <section class="content-section" id="languages-section">
+        <div class="section-header">
+          <h1 class="section-title">Todos os Idiomas</h1>
+          <p class="section-subtitle">Escolha o idioma desejado para ver os cursos e módulos de estudo.</p>
+        </div>
+        <div class="grid-container" id="languages-grid">
+          <!-- Renderizado dinamicamente -->
+        </div>
+      </section>
+
+      <!-- SEÇÃO NAVEGAÇÃO DE PASTA / CURSOS (EXPLORADOR) -->
+      <section class="content-section" id="folder-section">
+        <div class="section-header">
+          <h1 class="section-title" id="folder-title">Carregando Pasta...</h1>
+          <p class="section-subtitle" id="folder-subtitle">Selecione um curso ou aula para continuar.</p>
+        </div>
+
+        <div class="folder-items-grid" id="folder-items-grid">
+          <!-- Items renderizados via JS -->
+        </div>
+      </section>
+
+      <!-- SEÇÃO DE BUSCA -->
+      <section class="content-section" id="search-section">
+        <div class="search-box-container">
+          <span class="material-icons-round search-icon">search</span>
+          <input type="text" class="search-input focusable" id="search-input" placeholder="Digite o nome do idioma ou curso..." tabindex="0">
+        </div>
+        
+        <div class="search-results-container" id="search-results">
+          <p class="search-placeholder">Use o teclado na tela para pesquisar cursos de idiomas.</p>
+        </div>
+      </section>
+
+      <!-- SEÇÃO CONTINUAR ASSISTINDO COMPLETA -->
+      <section class="content-section" id="continue-section">
+        <div class="section-header">
+          <h1 class="section-title">Seu Histórico de Estudo</h1>
+          <p class="section-subtitle">Continue exatamente de onde parou em cada videoaula.</p>
+        </div>
+        <div class="grid-container" id="continue-grid">
+          <!-- Renderizado dinamicamente -->
+        </div>
+      </section>
+
+      <!-- SEÇÃO CONFIGURAÇÕES DO SERVIDOR -->
+      <section class="content-section" id="settings-section">
+        <div class="section-header">
+          <h1 class="section-title">Configurações do Servidor</h1>
+          <p class="section-subtitle">Informe o IP do seu computador na rede Wi-Fi local onde o servidor está rodando.</p>
+        </div>
+        <div class="settings-card">
+          <div class="input-group">
+            <label for="server-ip-input" class="input-label">URL / IP do Servidor (PC):</label>
+            <input type="text" id="server-ip-input" class="tv-input focusable" placeholder="http://192.168.10.68:3000" tabindex="0">
+          </div>
+          <div class="settings-actions">
+            <button class="btn-primary focusable" id="btn-save-server-ip" tabindex="0">
+              <span class="material-icons-round">save</span>
+              <span>Salvar e Conectar</span>
+            </button>
+            <button class="btn-secondary focusable" id="btn-reset-server-ip" tabindex="0">
+              <span class="material-icons-round">restart_alt</span>
+              <span>Restaurar IP Padrão</span>
+            </button>
+          </div>
+          <div style="margin-top: 1.5rem; font-size: 0.9rem; color: var(--text-muted);" id="server-test-info">
+            Status Atual: <strong id="current-server-url-display" style="color: var(--primary);">http://192.168.10.68:3000</strong>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- PLAYER DE VÍDEO CUSTOMIZADO PARA TV (OVERLAY EM TELA CHEIA) -->
+  <div class="tv-player-overlay" id="video-player-modal" style="display: none;">
+    <video id="tv-video" class="video-element" playsinline></video>
+
+    <!-- Controls Overlay (Aparece ao interagir com o controle remoto) -->
+    <div class="player-controls-overlay" id="player-controls">
+      
+      <!-- Top Bar -->
+      <div class="player-top-bar">
+        <button class="player-btn focusable" id="player-close-btn" tabindex="0">
+          <span class="material-icons-round">arrow_back</span>
+        </button>
+        <div class="player-title-info">
+          <h3 class="player-video-title" id="player-title">Nome da Aula</h3>
+          <span class="player-course-name" id="player-subtitle">Curso de Idiomas</span>
+        </div>
+      </div>
+
+      <!-- Center Play/Pause & Seek Buttons -->
+      <div class="player-center-controls">
+        <button class="player-circle-btn focusable" id="player-rewind-btn" tabindex="0" title="-10 segundos">
+          <span class="material-icons-round">replay_10</span>
+        </button>
+        <button class="player-circle-btn primary focusable" id="player-playpause-btn" tabindex="0" title="Play/Pause">
+          <span class="material-icons-round">play_arrow</span>
+        </button>
+        <button class="player-circle-btn focusable" id="player-forward-btn" tabindex="0" title="+10 segundos">
+          <span class="material-icons-round">forward_10</span>
+        </button>
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="player-bottom-bar">
+        
+        <!-- Barra de Progresso -->
+        <div class="progress-bar-container">
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="player-progress-fill"></div>
+          </div>
+        </div>
+
+        <div class="player-bar-actions">
+          <div class="time-display">
+            <span id="player-current-time">00:00</span> / <span id="player-duration">00:00</span>
+          </div>
+
+          <div class="player-action-buttons">
+            <!-- Botão de Velocidade de Idioma -->
+            <button class="player-text-btn focusable" id="player-speed-btn" tabindex="0">
+              <span class="material-icons-round">speed</span>
+              <span id="speed-label">1.0x</span>
+            </button>
+
+            <!-- Próximo Episódio -->
+            <button class="player-text-btn focusable" id="player-next-btn" tabindex="0">
+              <span>Próxima Aula</span>
+              <span class="material-icons-round">skip_next</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Speed Selector Menu Modal for TV -->
+    <div class="speed-menu-modal" id="speed-menu" style="display: none;">
+      <h4 class="speed-menu-title">Velocidade de Reprodução (Estudo)</h4>
+      <div class="speed-options">
+        <button class="speed-option focusable" data-speed="0.75" tabindex="0">0.75x (Lento)</button>
+        <button class="speed-option focusable active" data-speed="1.0" tabindex="0">1.0x (Normal)</button>
+        <button class="speed-option focusable" data-speed="1.25" tabindex="0">1.25x (Rápido)</button>
+        <button class="speed-option focusable" data-speed="1.5" tabindex="0">1.5x (Acelerado)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts JavaScript -->
+  <script src="js/tv-remote.js"></script>
+  <script src="js/player.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
